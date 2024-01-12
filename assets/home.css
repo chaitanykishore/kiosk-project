@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color: #3498db;
+    padding: 15px;
+    text-align: center;
+}
+
+.nav-button {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.center-box {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center-box h1 {
+    color: #3498db;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.center-box p {
+    color: #555;
+    font-size: 18px;
+    margin-top: 0;
+}

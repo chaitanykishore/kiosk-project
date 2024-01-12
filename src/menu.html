@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Set a light background color */
+        }
+        .navbar {
+            background-color: #ffc107; /* Light orange background for the navbar */
+        }
+        .sidebar {
+            background-color: #343a40; /* Dark background for the sidebar */
+            color: #ffffff; /* Text color for the sidebar */
+            height: 100vh; /* Adjusted height for the sidebar to cover the full screen vertically */
+            overflow-y: auto; /* Add a separate scrollbar for the sidebar */
+        }
+        .food-list {
+            padding: 20px;
+        }
+        .food-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #495057;
+        }
+        .food-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .food-display {
+            padding: 20px;
+        }
+        .food-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .food-card {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center; /* Center text within the box */
+            border-radius: 10px; /* Add rounded corners to create a square appearance */
+            flex-basis: calc(33.33% - 20px); /* Adjust the width of each food card */
+        }
+        .food-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px; /* Add rounded corners to the image */
+        }
+        /* Adjusted style for the "Add to Cart" button */
+        .food-card button {
+            margin-top: 10px; /* Add margin to the top of the button */
+        }
+        /* Style for the pop-up message */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 9999;
+        }
+        /* Style for the "Go to Cart" button */
+        .btn-go-to-cart {
+            background-color: #ff0f07; /* Set the button color to orange */
+            border-color: #ffc107; /* Set the border color to match the background color */
+        }
+        .btn-go-to-cart:hover {
+            background-color: #e05200; /* Set a darker shade of orange on hover */
+            border-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <button class="btn btn-go-to-cart mx-auto" onclick="goToCart()">Go to Cart</button> <!-- Apply the styling for the button -->
+    </div>
+</nav>
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <div class="food-list">
+                <div class="food-item" onclick="showFoodVarieties('burger')"> <!-- Pass 'burger' as an argument -->
+                    <img src="cute-burger-small-cartoon-food-concept-isolated-illustration-flat-cartoon-style-suitable-for-sticker-icon-design-premium-logo-vector.jpg" alt="Burger">
+                    <p>Burger</p>
+                </div>
+                <div class="food-item" onclick="showFoodVarieties('pizza')"> <!-- Pass 'pizza' as an argument -->
+                    <img src="iX5bJtX4.jpeg" alt="Pizza">
+                    <p>Pizza</p>
+                </div>
+                <div class="food-item" onclick="showFoodVarieties('softdrink')"> <!-- Pass 'softdrink' as an argument -->
+                    <img src="1000_F_429696595_KaC5ab2JnW959qs97VMbrKy9mAfoPJmZ.jpg" alt="Soft Drink">
+                    <p>Soft Drink</p>
+                </div>
+                <!-- Add more food items as needed -->
+            </div>
+        </div>
+
+        <!-- Selected Food Display -->
+        <div class="col-md-9 food-display">
+            <div id="foodVarieties" class="food-row"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Pop-up message for item added to cart -->
+<div id="popup" class="popup">
+    <p>Your item has been added to the cart!</p>
+</div>
+
+<!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+    function goToCart() {
+        window.location.href = 'cart.html'; // Redirect to 'cart.html'
+    }
+
+    function showFoodVarieties(foodType) {
+        var foodVarieties = document.getElementById('foodVarieties');
+
+        // Clear the previous content
+        foodVarieties.innerHTML = '';
+
+        // Load and display images for the selected food variety
+        for (let i = 1; i <= 10; i++) {
+            var imageSrc = `images/${foodType}/${foodType}${i}.jpg`; // Adjust the path based on your folder structure
+            var price = getRandomPrice(); // Replace this with logic to fetch actual prices
+
+            // Replace the following code with logic to fetch and display food varieties
+            foodVarieties.innerHTML += `<div class="food-card">
+                <img src="${imageSrc}" class="food-image" alt="${foodType} ${i}">
+                <h3>${foodType} ${i}</h3>
+                <p>Price: $${price.toFixed(2)}</p>
+                <p>Quantity: <input type="number" value="1"> <button class="btn btn-primary" onclick="addToCart('${foodType} ${i}', ${price})">Add to Cart</button></p>
+            </div>`;
+        }
+    }
+
+    // Function to generate random prices for demonstration purposes
+    function getRandomPrice() {
+        return Math.random() * (10 - 1) + 1; // Generates a random price between 1 and 10
+    }
+
+    // Function to add items to the cart
+    function addToCart(itemName, price) {
+        // Perform logic to add the item to the cart (you can use local storage, a server, etc.)
+        // For demonstration purposes, we'll just show a pop-up message
+        showPopupMessage();
+    }
+
+    // Function to display the pop-up message
+    function showPopupMessage() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+
+        // Hide the pop-up after 3 seconds (adjust as needed)
+        setTimeout(function () {
+            popup.style.display = 'none';
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>

@@ -2,6 +2,8 @@
 Simple self food ordering (kiosk) website 
 ## 📚 About
 The Kiosk Food Ordering System provides a visually appealing and user-friendly interface for customers to browse, order, and make payments seamlessly.
+# Drive link
+https://drive.google.com/file/d/1bBQtzaaVuzjEcjF3iNqbfOUtMX1V4PSP/view?usp=drivesdk
 ### Home Page
 ![Screenshot (34)](https://github.com/chaitanykishore/kiosk-project/assets/113979917/222c6df5-a536-41f1-99ab-ab5e8443d0b5)
 
